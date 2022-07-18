@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Items</title>
+    <link th:href="@{/styles/cardStyle.scss}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<tbody>
+    <tr th:if="${items.isEmpty()}">
+        <td colspan="2"> No Items Available </td>
+    </tr>
+</tbody>
+<!--<div class="card" style="width: 18rem;" th:each="item: ${items}">-->
+<!--    <img src="..." class="card-img-top" alt="...">-->
+<!--    <div class="card-body">-->
+<!--        <h5 class="card-title" th:text="${item.title}">Card title</h5>-->
+<!--        <p class="card-text" th:text="${item.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--        <a href="#" class="btn btn-primary">Go somewhere</a>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="container m-t-md" >
+    <!-- First row -->
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
+            <!-- Card -->
+            <article class="card animated fadeInLeft" th:each="item: ${items}">
+                <img class="card-img-top img-responsive" src="https://snap-photos.s3.amazonaws.com/img-thumbs/960w/1U2EGZ07GU.jpg" alt="Deer in nature" />
+                <div class="card-block">
+                    <h4 class="card-title" th:text="${item.title}">Animal Farm</h4>
+                    <h6 class="text-muted">George Orwell</h6>
+                    <p class="card-text"th:text="${item.description}">Tired of their servitude to man, a group of farm animals revolt and establish their own society, only to be betrayed into worse servitude by their leaders, the pigs. This satire addresses the communist philosophy the Soviet Union.</p>
+                    <a href="#" class="btn btn-primary">Read more</a>
+                </div>
+            </article><!-- .end Card -->
+        </div>
+    </div>
+</div>
+</body>
+</html>

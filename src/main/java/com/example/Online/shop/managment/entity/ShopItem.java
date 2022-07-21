@@ -26,4 +26,6 @@ public class ShopItem {
     private String tag;
 
     private Long price;
+
+    private String fileName;
 }

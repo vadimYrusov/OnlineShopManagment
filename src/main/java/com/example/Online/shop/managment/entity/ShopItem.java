@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
@@ -27,5 +28,13 @@ public class ShopItem {
 
     private Long price;
 
-    private String fileName;
+    @Column(nullable = true, length = 64)
+    private String imageName;
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (imageName == null || id == null) return null;
+
+        return "/item-images/" + id + "/" + imageName;
+    }
 }

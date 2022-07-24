@@ -56,7 +56,9 @@
                 <div class="card" style="border-radius: 15px;">
                     <div class="card-body">
 
-                        <form th:action="@{/items}" th:object="${item}" method="post" enctype="multipart/form-data">
+                        <form  th:action="@{/items}"
+                               th:object="${item}" method="post"
+                               enctype="multipart/form-data">
                             <div class="row align-items-center pt-4 pb-3">
                                 <div class="col-md-3 ps-5">
 
@@ -65,7 +67,8 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
 
-                                    <input th:field="*{title}" type="text" class="form-control form-control-lg"/>
+                                    <input type="text" name="title"
+                                           th:field="*{title}" class="form-control form-control-lg"/>
 
                                 </div>
                             </div>
@@ -80,7 +83,8 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
 
-                                    <input th:field="*{description}" type="text" class="form-control form-control-lg"
+                                    <input type="text" name="description"
+                                           th:field="*{description}"class="form-control form-control-lg"
                                            placeholder="example@example.com"/>
 
                                 </div>
@@ -96,7 +100,8 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
 
-                                    <input th:field="*{tag}" type="text" class="form-control form-control-lg"
+                                    <input type="text" name="tag"
+                                           th:field="*{tag}" class="form-control form-control-lg"
                                               placeholder="Message sent to the employer"/>
 
                                 </div>
@@ -113,7 +118,7 @@
                                 <div class="col-md-9 pe-5">
 
                                     <div class="input-group">
-                                        <input type="file" name="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
+                                        <input type="file" name="file" class="form-control-file">
                                     </div>
 
                                 </div>

@@ -37,3 +37,11 @@ a {
 .card-text {
   margin-left: 5px;
 }
+
+.div1 {
+  display: inline;
+}
+
+.p {
+  display: inline;
+}

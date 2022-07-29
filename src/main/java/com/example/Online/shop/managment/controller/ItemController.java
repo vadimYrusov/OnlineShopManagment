@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -33,14 +30,14 @@ public class ItemController {
     }
 
     @GetMapping("/items/new")
-    public String createMember(Model model) {
+    public String createItem(Model model) {
         ShopItem item = new ShopItem();
         model.addAttribute("item", item);
         return "create_item";
     }
 
     @PostMapping("/items")
-    public String saveMember(
+    public String saveItem(
             @ModelAttribute("item") ShopItem shopItem,
 //            BindingResult result,
             @RequestParam("file") MultipartFile file
@@ -60,6 +57,12 @@ public class ItemController {
         FileUploadUtil.saveFile(uploadDir, fileName, file);
 
         itemRepository.save(shopItem);
-        return "items";
+        return "redirect:/items";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteItem(@PathVariable Long id) {
+        itemRepository.deleteById(id);
+        return "redirect:/items";
     }
 }

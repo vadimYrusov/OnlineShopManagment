@@ -60,11 +60,18 @@
             <img class="card-img-top" th:src="@{${item.photosImagePath}}" alt="Card image cap">
             <div class="card-body">
                 <span class="product_name" th:text="${item.title}">Adidas Originals</span>
-                <span class="product_price" th:text="${item.price}">
+                <span class="product_price" th:text="${item.price}"></span>
                 <hr>
                 <p class="card-text" th:text="${item.tag}"></p>
-                <p class="card-text" th:text="${item.description}"></p>
-                <a href="#" class="btn btn-primary">AddToCard</a>
+                <div class="btn-group hidden-sm-down hidden-md-down" role="group" aria-label="Card buttons">
+<!--                    <a href="#" class="btn btn-primary">AddToCard</a>-->
+<!--                    <a th:href="@{/delete/{id}(id=${item.id})}"-->
+<!--                       class="btn btn-danger">-->
+<!--                        Delete-->
+<!--                    </a>-->
+                    <a href="#" class="btn btn-primary">More</a>
+                    <a href="#" class="btn btn-primary">EDit</a>
+                </div>
             </div>
         </div>
     </div>

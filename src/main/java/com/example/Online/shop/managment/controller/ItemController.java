@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -58,6 +59,12 @@ public class ItemController {
 
         itemRepository.save(shopItem);
         return "redirect:/items";
+    }
+
+    @GetMapping("/more/{id}")
+    public String editItem(@PathVariable Long id, Model model) {
+        model.addAttribute("item", itemRepository.findById(id));
+        return "more_item";
     }
 
     @GetMapping("/delete/{id}")

@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -62,9 +61,48 @@ public class ItemController {
     }
 
     @GetMapping("/more/{id}")
-    public String editItem(@PathVariable Long id, Model model) {
+    public String moreItem(@PathVariable Long id, Model model) {
         model.addAttribute("item", itemRepository.findById(id));
         return "more_item";
+    }
+
+    @GetMapping("/item/edit/{id}")
+    public String editItemForm(@PathVariable Long id, Model model) {
+        ShopItem item = itemRepository.findById(id).get();
+        model.addAttribute("item", item);
+        return "edit_item";
+    }
+
+    @PostMapping("/item/{id}")
+    public String updateMember(@PathVariable Long id,
+                               @ModelAttribute("member") ShopItem item,
+                               @RequestParam("file") MultipartFile file,
+//                               BindingResult result,
+                               Model model
+    ) throws IOException {
+
+//        if (result.hasErrors()) {
+//            return "edit_member";
+//        }
+
+        ShopItem existingItem = itemRepository.findById(id).get();
+        existingItem.setId(id);
+        existingItem.setTitle(item.getTitle());
+        existingItem.setPrice(Long.valueOf(item.getPrice()));
+        existingItem.setDescription(item.getDescription());
+        existingItem.setTag(item.getTag());
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        existingItem.setImageName(fileName);
+
+        ShopItem savedItem = itemRepository.save(existingItem);
+
+        String uploadDir = "./item-images/" + savedItem.getId();
+
+        FileUploadUtil.saveFile(uploadDir, fileName, file);
+
+        itemRepository.save(existingItem);
+
+        return "redirect:/items";
     }
 
     @GetMapping("/delete/{id}")

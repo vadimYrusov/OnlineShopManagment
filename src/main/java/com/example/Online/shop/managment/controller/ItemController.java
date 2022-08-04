@@ -76,9 +76,8 @@ public class ItemController {
     @PostMapping("/item/{id}")
     public String updateMember(@PathVariable Long id,
                                @ModelAttribute("member") ShopItem item,
-                               @RequestParam("file") MultipartFile file,
+                               @RequestParam("file") MultipartFile file
 //                               BindingResult result,
-                               Model model
     ) throws IOException {
 
 //        if (result.hasErrors()) {
@@ -88,7 +87,7 @@ public class ItemController {
         ShopItem existingItem = itemRepository.findById(id).get();
         existingItem.setId(id);
         existingItem.setTitle(item.getTitle());
-        existingItem.setPrice(Long.valueOf(item.getPrice()));
+        existingItem.setPrice(item.getPrice());
         existingItem.setDescription(item.getDescription());
         existingItem.setTag(item.getTag());
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());

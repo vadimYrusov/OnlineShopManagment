@@ -27,8 +27,8 @@ public class ShopItem {
 
     private Long price;
 
-    public String getPrice() {
-        return price + "$";
+    public Long getPrice() {
+        return price;
     }
 
     @Column(nullable = true, length = 64)

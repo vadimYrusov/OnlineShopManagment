@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
-    <title>Items</title>
-    <link rel="stylesheet" th:href="@{/styles/cardStyle.css}"/>
+    <title>Registration</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
-
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
@@ -40,42 +37,64 @@
                     </ul>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <a class="btn btn-light my-2 my-sm-0 mr-1" type="submit">Login</a>
-                <a class="btn btn-light my-2 my-sm-0" type="submit">Signup</a>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
     </div>
 </nav>
 
-<tbody>
-<tr th:if="${items.isEmpty()}">
-    <td colspan="2"> No Items Available</td>
-</tr>
-</tbody>
+<section class="vh-100">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-9">
 
-<div class="row">
-    <div class="col-xl-3" th:each="item : ${items}">
-        <div class="card" style="width: 15rem;">
-            <img class="card-img-top" th:src="@{${item.photosImagePath}}" alt="Card image cap">
-            <div class="card-body">
-                <span class="product_name" th:text="${item.title}">Adidas Originals</span>
-                <span class="product_price" th:text="${item.price}"></span>
-                <hr>
-                <p class="card-text" th:text="${item.tag}"></p>
-                <div class="btn-group hidden-sm-down hidden-md-down" role="group" aria-label="Card buttons">
-                    <!--                    <a href="#" class="btn btn-primary">AddToCard</a>-->
-                    <!--                    <a th:href="@{/delete/{id}(id=${item.id})}"-->
-                    <!--                       class="btn btn-danger">-->
-                    <!--                        Delete-->
-                    <!--                    </a>-->
-                    <a th:href="@{/more/{id}(id=${item.id})}" class="btn btn-primary">More</a>
+                <h1 class="ml-7">Registration</h1>
 
-                    <a th:href="@{/item/edit/{id}(id=${item.id})}" class="btn btn-primary">Edit</a>
+                <div class="card bg-light" style="border-radius: 15px;">
+                    <div class="card-body">
+
+                        <div class="row align-items-center pt-4 pb-3">
+                            <div class="col-md-3 ps-5">
+
+                                <h6 class="mb-0">Full name</h6>
+
+                            </div>
+                            <div class="col-md-9 pe-5">
+
+                                <input type="text" class="form-control form-control-lg" />
+
+                            </div>
+                        </div>
+
+                        <hr class="mx-n3">
+
+                        <div class="row align-items-center py-3">
+                            <div class="col-md-3 ps-5">
+
+                                <h6 class="mb-0">Email address</h6>
+
+                            </div>
+                            <div class="col-md-9 pe-5">
+
+                                <input type="email" class="form-control form-control-lg" placeholder="example@example.com" />
+
+                            </div>
+                        </div>
+
+                        <hr class="mx-n3">
+
+                        <div class="px-5 py-4">
+                            <button type="submit" class="btn btn-primary btn-lg">Send application</button>
+                        </div>
+
+                    </div>
                 </div>
+
             </div>
         </div>
     </div>
-</div>
+</section>
 </body>
 </html>

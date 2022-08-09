@@ -41,8 +41,8 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <a class="btn btn-light my-2 my-sm-0 mr-1" type="submit">Login</a>
-                <a class="btn btn-light my-2 my-sm-0" type="submit">Signup</a>
+                <a class="btn btn-light my-2 my-sm-0 nav-link" th:href="@{/registration/new}" type="submit">Register</a>
+                <a class="btn btn-light my-2 my-sm-0 mr-1 nav-link" th:href="@{/login}" type="submit">Login</a>
             </form>
         </div>
     </div>
@@ -64,11 +64,6 @@
                 <hr>
                 <p class="card-text" th:text="${item.tag}"></p>
                 <div class="btn-group hidden-sm-down hidden-md-down" role="group" aria-label="Card buttons">
-                    <!--                    <a href="#" class="btn btn-primary">AddToCard</a>-->
-                    <!--                    <a th:href="@{/delete/{id}(id=${item.id})}"-->
-                    <!--                       class="btn btn-danger">-->
-                    <!--                        Delete-->
-                    <!--                    </a>-->
                     <a th:href="@{/more/{id}(id=${item.id})}" class="btn btn-primary">More</a>
 
                     <a th:href="@{/item/edit/{id}(id=${item.id})}" class="btn btn-primary">Edit</a>

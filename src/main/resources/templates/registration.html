@@ -59,7 +59,7 @@
                 <div class="card bg-light" style="border-radius: 15px;">
                     <div class="card-body">
 
-                        <form th:action="@{/registration/save}" th:object="${user}" method="post">
+                        <form th:action="@{/registration}" th:object="${user}" method="post">
                             <div class="row align-items-center pt-4 pb-3">
                                 <div class="col-md-3 ps-5">
 
@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
 
-                                    <input type="text" name="name" th:field="*{name}" class="form-control form-control-lg"/>
+                                    <input type="text" name="name" id="name" class="form-control form-control-lg"/>
 
                                 </div>
                             </div>
@@ -83,7 +83,7 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
 
-                                    <input type="text" name="email" th:field="*{email}" class="form-control form-control-lg"
+                                    <input type="text" name="email" id="email" class="form-control form-control-lg"
                                            placeholder="example@example.com"/>
 
                                 </div>
@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
 
-                                    <input type="text" name="password" th:field="*{password}" class="form-control form-control-lg"/>
+                                    <input type="password" name="password" id="password" class="form-control form-control-lg"/>
 
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
 package com.example.Online.shop.managment.service;
 
 import com.example.Online.shop.managment.entity.User;
-import com.example.Online.shop.managment.entity.enums.Role;
+
 import com.example.Online.shop.managment.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +20,6 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
 @RequiredArgsConstructor
 public class UserServiceImpl {
 
@@ -28,12 +27,7 @@ public class UserServiceImpl {
 
     private final PasswordEncoder passwordEncoder;
 
-    public boolean createUser(User user) {
-        if (userRepository.findByEmail(user.getEmail()) != null) return false;
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.getRoles().add(Role.ROLE_USER);
-        return true;
-    }
+
 
 //    private final UserRepository userRepository;
 //

@@ -39,7 +39,7 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <a class="btn btn-light my-2 my-sm-0 nav-link" th:href="@{/registration/new}" type="submit">Register</a>
+                <a class="btn btn-light my-2 my-sm-0 nav-link" th:href="@{/registration}" type="submit">Register</a>
                 <a class="btn btn-light my-2 my-sm-0 mr-1 nav-link" th:href="@{/login}" type="submit">Login</a>
             </form>
         </div>
@@ -51,36 +51,20 @@
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-xl-9">
 
-                <div th:if="${param.success}">
-                    <div class="alert alert-info">
-                        You are successful registered
-                    </div>
-                </div>
-
                 <div class="card bg-light" style="border-radius: 15px;">
                     <div class="card-body">
 
                         <form th:action="@{/login}" method="post">
 
-                            <!--  error message -->
-                            <div th:if="${param.error}">
-                                <div class="alert alert-danger">Invalid username or password</div>
-                            </div>
-
-                            <!--  logout message -->
-                            <div th:if="${param.logout}">
-                                <div class="alert alert-info">You have logged out</div>
-                            </div>
-
                             <div class="row align-items-center pt-4 pb-3">
                                 <div class="col-md-3 ps-5">
 
-                                    <h6 class="mb-0">User name</h6>
+                                    <h6 class="mb-0">Email</h6>
 
                                 </div>
                                 <div class="col-md-9 pe-5">
 
-                                    <input type="text" name="name" id="name" class="form-control form-control-lg"/>
+                                    <input type="text" name="email" id="email" class="form-control form-control-lg"/>
 
                                 </div>
                             </div>
@@ -95,7 +79,7 @@
                                 </div>
                                 <div class="col-md-9 pe-5">
 
-                                    <input type="text" name="password" id="password" class="form-control form-control-lg"/>
+                                    <input type="password" name="password" id="password" class="form-control form-control-lg"/>
 
                                 </div>
                             </div>

@@ -19,11 +19,6 @@ public class ItemController {
 
     private final ItemRepository itemRepository;
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
     @GetMapping("/items")
     public String listItems(Model model) {
 

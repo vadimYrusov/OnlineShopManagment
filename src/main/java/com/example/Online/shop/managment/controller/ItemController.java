@@ -2,6 +2,7 @@ package com.example.Online.shop.managment.controller;
 
 import com.example.Online.shop.managment.entity.ShopItem;
 import com.example.Online.shop.managment.fileUpload.FileUploadUtil;
+import com.example.Online.shop.managment.global.GlobalData;
 import com.example.Online.shop.managment.repo.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ public class ItemController {
         List<ShopItem> items = itemRepository.findAll();
 
         model.addAttribute("items", items);
+        model.addAttribute("cartCount", GlobalData.cart.size());
+
 
         return "items";
     }
@@ -63,6 +66,8 @@ public class ItemController {
     @GetMapping("/more/{id}")
     public String moreItem(@PathVariable Long id, Model model) {
         model.addAttribute("item", itemRepository.findById(id));
+        model.addAttribute("cartCount", GlobalData.cart.size());
+
         return "more_item";
     }
 
@@ -74,8 +79,8 @@ public class ItemController {
     }
 
     @PostMapping("/item/{id}")
-    public String updateMember(@PathVariable Long id,
-                               @ModelAttribute("member") ShopItem item,
+    public String updateItem(@PathVariable Long id,
+                               @ModelAttribute("item") ShopItem item,
                                @RequestParam("file") MultipartFile file
 //                               BindingResult result,
     ) throws IOException {

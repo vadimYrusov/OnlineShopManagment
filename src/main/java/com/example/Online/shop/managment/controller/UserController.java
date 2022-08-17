@@ -65,32 +65,4 @@ public class UserController {
 
     }
 
-//    @PostMapping("/registration")
-//    public String createUser(@ModelAttribute("user") User user) {
-//        userService.createUser(user);
-//        return "redirect:/login";
-//    }
-
-
-
-
-
-//    private final UserService userService;
-//
-//    @GetMapping
-//    @RequestMapping("/new")
-//    public String registrationForm(Model model) {
-//        User user = new User();
-//        model.addAttribute("user", user);
-//        return "registration";
-//    }
-//
-//    @PostMapping
-//    @RequestMapping("/save")
-//    public String registrationUser(@ModelAttribute("user") User user) {
-//        userService.save(user);
-//        return "redirect:/registration?success";
-//    }
-
-
 }

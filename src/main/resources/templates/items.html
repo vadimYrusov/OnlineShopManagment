@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
     <meta charset="UTF-8">
@@ -23,7 +24,7 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/items}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/items/new}">Add new</a>
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/items/new}">Add new</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -41,8 +42,12 @@
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <a class="btn btn-light my-2 my-sm-0 nav-link" th:href="@{/registration}" type="submit">Register</a>
-                <a class="btn btn-light my-2 my-sm-0 mr-1 nav-link" th:href="@{/login}" type="submit">Login</a>
+<!--                <a class="btn btn-light my-2 my-sm-0 nav-link" th:href="@{/registration}" type="submit">Register</a>-->
+                <a sec:authorize="isAnonymous()" class="btn btn-light my-2 my-sm-0 mr-1 nav-link" th:href="@{/login}" type="submit">Login</a>
+
+                <a sec:authorize="isAuthenticated()" th:href="@{/cart}">Logout</a>
+
+                <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
             </form>
         </div>
     </div>
@@ -66,11 +71,17 @@
                 <div class="btn-group hidden-sm-down hidden-md-down" role="group" aria-label="Card buttons">
                     <a th:href="@{/more/{id}(id=${item.id})}" class="btn btn-primary">More</a>
 
-                    <a th:href="@{/item/edit/{id}(id=${item.id})}" class="btn btn-primary">Edit</a>
+                    <a sec:authorize="hasRole('ROLE_USER')" th:href="@{/addToCard/{id}(id=${item.id})}" class="btn btn-primary">Add to cart</a>
+
+                    <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/item/edit/{id}(id=${item.id})}" class="btn btn-primary">Edit</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<body>
+<div sec:authorize="isAuthenticated()">
+    Authenticated as <span sec:authentication="name"></span></div>
+</body>
 </body>
 </html>

@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .permitAll()
                 .failureUrl("/login")
-                .defaultSuccessUrl("/userHome")
+                .defaultSuccessUrl("/items")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and()
@@ -41,8 +41,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login")
                 .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
                 .and()
-                .exceptionHandling();
+                .exceptionHandling()
+                .and()
+                .csrf()
+                .disable();
         http.headers().frameOptions().disable();
     }
 
@@ -58,6 +62,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/resources/**", "/static/**", "/item-images/**");
+        web.ignoring().antMatchers("/resources/**", "/static/**", "/item-images/**", "/css/**");
     }
 }

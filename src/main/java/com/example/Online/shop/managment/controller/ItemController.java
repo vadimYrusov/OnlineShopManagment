@@ -1,5 +1,6 @@
 package com.example.Online.shop.managment.controller;
 
+import com.example.Online.shop.managment.entity.Category;
 import com.example.Online.shop.managment.entity.ShopItem;
 import com.example.Online.shop.managment.fileUpload.FileUploadUtil;
 import com.example.Online.shop.managment.global.GlobalData;
@@ -27,7 +28,7 @@ public class ItemController {
 
         model.addAttribute("items", items);
         model.addAttribute("cartCount", GlobalData.cart.size());
-
+        model.addAttribute("category", new Category());
 
         return "items";
     }
@@ -38,6 +39,12 @@ public class ItemController {
         model.addAttribute("item", item);
         return "create_item";
     }
+
+    @PostMapping("/addCategory")
+    public String addCategory() {
+        return "redirect:/items";
+    }
+
 
     @PostMapping("/items")
     public String saveItem(

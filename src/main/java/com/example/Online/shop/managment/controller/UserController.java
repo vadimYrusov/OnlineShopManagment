@@ -36,15 +36,6 @@ public class UserController {
         return "login";
     }
 
-    @GetMapping("/userHome")
-    public String userPage(Model model) {
-        List<ShopItem> items = itemRepository.findAll();
-
-        model.addAttribute("items", items);
-
-        return "user_home";
-    }
-
     @GetMapping("/registration")
     public String registration(Model model) {
         User user = new User();

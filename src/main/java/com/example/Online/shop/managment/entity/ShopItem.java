@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -26,6 +27,14 @@ public class ShopItem {
     private String tag;
 
     private Long price;
+
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+//    @JoinTable(
+//            name = "item_category",
+//            joinColumns = {@JoinColumn(name = "ITEM_ID", referencedColumnName = "ID")},
+//            inverseJoinColumns = {@JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID")}
+//    )
+    private List<Category> category;
 
     public Long getPrice() {
         return price;

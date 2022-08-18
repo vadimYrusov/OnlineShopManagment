@@ -34,14 +34,6 @@ public class User {
     @NotEmpty
     private String password;
 
-//    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "user_cart",
-//            joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID")},
-//            inverseJoinColumns = {@JoinColumn(name = "CART_ID", referencedColumnName = "ID")}
-//    )
-//    private Cart cart;
-
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",

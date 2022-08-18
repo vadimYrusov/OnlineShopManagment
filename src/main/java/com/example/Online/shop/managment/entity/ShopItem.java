@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
@@ -34,9 +33,6 @@ public class ShopItem {
 
     @Column(nullable = true, length = 64)
     private String imageName;
-
-//    @ManyToMany(mappedBy = "items")
-//    private List<Cart> carts;
 
     @Transient
     public String getPhotosImagePath() {

@@ -13,7 +13,7 @@
 
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -26,28 +26,17 @@
                 <li class="nav-item">
                     <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/items/new}">Add new</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="New Category" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
             </ul>
             <form class="form-inline my-2 my-lg-0">
 <!--                <a class="btn btn-light my-2 my-sm-0 nav-link" th:href="@{/registration}" type="submit">Register</a>-->
-                <a sec:authorize="isAnonymous()" class="btn btn-light my-2 my-sm-0 mr-1 nav-link" th:href="@{/login}" type="submit">Login</a>
+                <a sec:authorize="isAnonymous()" class="btn btn-light my-2 my-sm-0 mr-1 nav-link" th:href="@{/login}" type="submit">Sign in</a>
 
-                <a sec:authorize="isAuthenticated()" th:href="@{/cart}">Logout</a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/cart}">Cart</a>
 
-                <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Sign out</a>
             </form>
         </div>
     </div>
@@ -61,11 +50,12 @@
 
 <div class="row">
     <div class="col-xl-3" th:each="item : ${items}">
-        <div class="card" style="width: 15rem;">
+        <div class="card" style="width: 15rem; margin-top: 10%; margin-left: 20%">
             <img class="card-img-top" th:src="@{${item.photosImagePath}}" alt="Card image cap">
             <div class="card-body">
                 <span class="product_name" th:text="${item.title}">Adidas Originals</span>
                 <span class="product_price" th:text="${item.price}"></span>
+                <span class="input-group-text" id="basic-addon1">$</span>
                 <hr>
                 <p class="card-text" th:text="${item.tag}"></p>
                 <div class="btn-group hidden-sm-down hidden-md-down" role="group" aria-label="Card buttons">

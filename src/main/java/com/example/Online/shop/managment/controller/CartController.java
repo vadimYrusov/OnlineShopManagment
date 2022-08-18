@@ -3,7 +3,6 @@ package com.example.Online.shop.managment.controller;
 import com.example.Online.shop.managment.entity.ShopItem;
 import com.example.Online.shop.managment.global.GlobalData;
 import com.example.Online.shop.managment.repo.ItemRepository;
-import com.example.Online.shop.managment.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @Controller
 @RequiredArgsConstructor
 public class CartController {
-
-    private final UserRepository userRepository;
 
     private final ItemRepository itemRepository;
 

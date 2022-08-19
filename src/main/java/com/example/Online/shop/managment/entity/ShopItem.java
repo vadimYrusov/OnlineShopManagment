@@ -24,17 +24,16 @@ public class ShopItem {
 
     private String description;
 
-    private String tag;
-
+    private String category;
     private Long price;
 
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+//    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
 //    @JoinTable(
 //            name = "item_category",
 //            joinColumns = {@JoinColumn(name = "ITEM_ID", referencedColumnName = "ID")},
 //            inverseJoinColumns = {@JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID")}
 //    )
-    private List<Category> category;
+//    private List<Category> category;
 
     public Long getPrice() {
         return price;

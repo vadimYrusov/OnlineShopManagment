@@ -4,6 +4,7 @@ import com.example.Online.shop.managment.entity.Category;
 import com.example.Online.shop.managment.entity.ShopItem;
 import com.example.Online.shop.managment.fileUpload.FileUploadUtil;
 import com.example.Online.shop.managment.global.GlobalData;
+import com.example.Online.shop.managment.repo.CategoryRepository;
 import com.example.Online.shop.managment.repo.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,8 @@ public class ItemController {
 
     private final ItemRepository itemRepository;
 
+    private final CategoryRepository categoryRepository;
+
     @GetMapping("/items")
     public String listItems(Model model) {
 
@@ -37,14 +40,9 @@ public class ItemController {
     public String createItem(Model model) {
         ShopItem item = new ShopItem();
         model.addAttribute("item", item);
+        model.addAttribute("categories", categoryRepository.findAll());
         return "create_item";
     }
-
-    @PostMapping("/addCategory")
-    public String addCategory() {
-        return "redirect:/items";
-    }
-
 
     @PostMapping("/items")
     public String saveItem(
@@ -101,7 +99,7 @@ public class ItemController {
         existingItem.setTitle(item.getTitle());
         existingItem.setPrice(item.getPrice());
         existingItem.setDescription(item.getDescription());
-        existingItem.setTag(item.getTag());
+        existingItem.setCategory(item.getCategory());
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         existingItem.setImageName(fileName);
 

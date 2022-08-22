@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
     <meta charset="UTF-8">
     <title>More</title>
@@ -10,7 +11,7 @@
 
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand">Navbar</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -21,26 +22,31 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/items}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/items/new}">Add new</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/cart}">Cart</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                       aria-expanded="false">
-                        Dropdown
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                <form th:action="@{/items}" method="get" style="margin-left: 10%" class="d-flex">
+                    <input type="text" name="keyword" th:value="${keyword}" class="form-control me-2"
+                           placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/items/new}">Add new</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addCategory}">Add new
+                        Category</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editCategory}">Edit
+                        Category</a>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+            <form class="form-inline my-2 my-lg-0">
+                <!--                <a class="btn btn-light my-2 my-sm-0 nav-link" th:href="@{/registration}" type="submit">Register</a>-->
+                <a sec:authorize="isAnonymous()" class="btn btn-light my-2 my-sm-0 mr-1 nav-link" th:href="@{/login}"
+                   type="submit">Sign in</a>
+
+                <a sec:authorize="isAuthenticated()" th:href="@{/logout}">Sign out</a>
             </form>
         </div>
     </div>

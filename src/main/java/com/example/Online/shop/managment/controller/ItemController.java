@@ -7,6 +7,7 @@ import com.example.Online.shop.managment.global.GlobalData;
 import com.example.Online.shop.managment.repo.CategoryRepository;
 import com.example.Online.shop.managment.repo.ItemRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -25,13 +27,20 @@ public class ItemController {
     private final CategoryRepository categoryRepository;
 
     @GetMapping("/items")
-    public String listItems(Model model) {
+    public String listItems(Model model, String keyword) {
 
-        List<ShopItem> items = itemRepository.findAll();
+        List<ShopItem> items;
+
+        if (keyword == null) {
+            items = itemRepository.findAll();
+        } else {
+            items = itemRepository.findByTitleContainsIgnoreCase(keyword);
+        }
 
         model.addAttribute("items", items);
         model.addAttribute("cartCount", GlobalData.cart.size());
         model.addAttribute("category", new Category());
+        model.addAttribute("keyword", "");
 
         return "items";
     }

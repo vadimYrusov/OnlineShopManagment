@@ -1,0 +1,5 @@
+databaseChangeLog:
+- include:
+    file: liquibase/V1__Init_DB.sql
+- include:
+    file: liquibase/V2__Add_admin.sql

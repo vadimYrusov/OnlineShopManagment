@@ -27,19 +27,10 @@ public class ShopItem {
     private String category;
     private Long price;
 
-//    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-//    @JoinTable(
-//            name = "item_category",
-//            joinColumns = {@JoinColumn(name = "ITEM_ID", referencedColumnName = "ID")},
-//            inverseJoinColumns = {@JoinColumn(name = "CATEGORY_ID", referencedColumnName = "ID")}
-//    )
-//    private List<Category> category;
-
     public Long getPrice() {
         return price;
     }
 
-    @Column(nullable = true, length = 64)
     private String imageName;
 
     @Transient

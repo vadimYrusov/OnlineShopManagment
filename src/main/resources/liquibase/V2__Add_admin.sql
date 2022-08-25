@@ -8,3 +8,5 @@ VALUES (1, 'ROLE_ADMIN'),
 insert into user_role (user_id, role_id)
 VALUES (1, 1);
 
+
+

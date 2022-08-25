@@ -60,9 +60,6 @@ public class ItemController {
             @RequestParam("file") MultipartFile file
 //            RedirectAttributes attributes
     ) throws IOException {
-//        if (result.hasErrors()) {
-//            return "create_item";
-//        }
 
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         shopItem.setImageName(fileName);

@@ -7,7 +7,6 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.util.List;
 
 @Getter
 @Setter
@@ -24,6 +23,7 @@ public class Category {
     @NotEmpty
     private String name;
 
-//    @ManyToMany(mappedBy = "category")
-//    private List<ShopItem> items;
+    public Category(String name) {
+        this.name = name;
+    }
 }

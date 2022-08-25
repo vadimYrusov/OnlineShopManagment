@@ -11,7 +11,7 @@
 
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-        <a class="navbar-brand">Navbar</a>
+        <a class="navbar-brand">In The Ground</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -57,7 +57,7 @@
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" th:src="@{${item.get().photosImagePath}}" alt="..." /></div>
             <div class="col-md-6">
-                <h1 class="display-5 fw-bolder" th:text="${item.get().title}">Shop item template</h1>
+                <h1 style="color: #696969" class="display-5 fw-bolder" th:text="${item.get().title}">Shop item template</h1>
                 <div class="fs-5 mb-5">
                     <span th:text="${item.get().price}">$40.00</span>
                 </div>

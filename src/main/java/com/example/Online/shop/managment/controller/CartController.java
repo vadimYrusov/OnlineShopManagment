@@ -9,6 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Objects;
+
 @Controller
 @RequiredArgsConstructor
 public class CartController {
@@ -27,5 +29,11 @@ public class CartController {
         model.addAttribute("total", GlobalData.cart.stream().mapToDouble(ShopItem::getPrice));
         model.addAttribute("cart", GlobalData.cart);
         return "cart";
+    }
+
+    @GetMapping("/cart{id}")
+    public String deleteItemFromCart(@PathVariable Long id) {
+        GlobalData.cart.removeIf(item -> Objects.equals(item.getTitle(), itemRepository.findById(id).get().getTitle()));
+        return "redirect:/cart";
     }
 }

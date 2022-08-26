@@ -7,7 +7,6 @@ import com.example.Online.shop.managment.global.GlobalData;
 import com.example.Online.shop.managment.repo.CategoryRepository;
 import com.example.Online.shop.managment.repo.ItemRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -56,9 +54,7 @@ public class ItemController {
     @PostMapping("/items")
     public String saveItem(
             @ModelAttribute("item") ShopItem shopItem,
-//            BindingResult result,
             @RequestParam("file") MultipartFile file
-//            RedirectAttributes attributes
     ) throws IOException {
 
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
@@ -74,7 +70,7 @@ public class ItemController {
         return "redirect:/items";
     }
 
-    @GetMapping("/more/{id}")
+    @GetMapping("/item/{id}")
     public String moreItem(@PathVariable Long id, Model model) {
         model.addAttribute("item", itemRepository.findById(id));
         model.addAttribute("cartCount", GlobalData.cart.size());
@@ -82,7 +78,7 @@ public class ItemController {
         return "more_item";
     }
 
-    @GetMapping("/item/edit/{id}")
+    @GetMapping("/items/{id}")
     public String editItemForm(@PathVariable Long id, Model model) {
         ShopItem item = itemRepository.findById(id).get();
         model.addAttribute("item", item);
@@ -93,12 +89,7 @@ public class ItemController {
     public String updateItem(@PathVariable Long id,
                                @ModelAttribute("item") ShopItem item,
                                @RequestParam("file") MultipartFile file
-//                               BindingResult result,
     ) throws IOException {
-
-//        if (result.hasErrors()) {
-//            return "edit_member";
-//        }
 
         ShopItem existingItem = itemRepository.findById(id).get();
         existingItem.setId(id);
@@ -106,14 +97,17 @@ public class ItemController {
         existingItem.setPrice(item.getPrice());
         existingItem.setDescription(item.getDescription());
         existingItem.setCategory(item.getCategory());
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        existingItem.setImageName(fileName);
+        if (file != null) {
+            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
 
-        ShopItem savedItem = itemRepository.save(existingItem);
+            existingItem.setImageName(fileName);
 
-        String uploadDir = "./item-images/" + savedItem.getId();
+            ShopItem savedItem = itemRepository.save(existingItem);
 
-        FileUploadUtil.saveFile(uploadDir, fileName, file);
+            String uploadDir = "./item-images/" + savedItem.getId();
+
+            FileUploadUtil.saveFile(uploadDir, fileName, file);
+        }
 
         itemRepository.save(existingItem);
 

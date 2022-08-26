@@ -1,7 +1,6 @@
 package com.example.Online.shop.managment.controller;
 
 import com.example.Online.shop.managment.entity.Role;
-import com.example.Online.shop.managment.entity.ShopItem;
 import com.example.Online.shop.managment.entity.User;
 import com.example.Online.shop.managment.repo.ItemRepository;
 import com.example.Online.shop.managment.repo.RoleRepository;

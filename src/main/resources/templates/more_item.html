@@ -22,7 +22,7 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/items}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/cart}">Cart</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/carts}">Cart</a>
                 </li>
                 <form th:action="@{/items}" method="get" style="margin-left: 10%" class="d-flex">
                     <input type="text" name="keyword" th:value="${keyword}" class="form-control me-2"
@@ -33,16 +33,15 @@
                     <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/items/new}">Add new</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addCategory}">Add new
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/category}">Add new
                         Category</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editCategory}">Edit
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/categories}">Edit
                         Category</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <!--                <a class="btn btn-light my-2 my-sm-0 nav-link" th:href="@{/registration}" type="submit">Register</a>-->
                 <a sec:authorize="isAnonymous()" class="btn btn-light my-2 my-sm-0 mr-1 nav-link" th:href="@{/login}"
                    type="submit">Sign in</a>
 

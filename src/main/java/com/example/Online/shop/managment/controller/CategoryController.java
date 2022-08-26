@@ -16,22 +16,38 @@ public class CategoryController {
 
     private final CategoryRepository categoryRepository;
 
-    @GetMapping("/addCategory")
+    @GetMapping("/category")
     public String addCategory(Model model) {
         Category category = new Category();
         model.addAttribute("category", category);
         return "category";
     }
 
-    @GetMapping("/editCategory")
+    @GetMapping("/categories")
     public String editCategory(Model model) {
         model.addAttribute("categories", categoryRepository.findAll());
         return "categories";
     }
 
-    @PostMapping("/addCategory")
+    @PostMapping("/category")
     public String saveCategory(@ModelAttribute Category category) {
         categoryRepository.save(category);
+        return "redirect:/items";
+    }
+
+    @GetMapping("/categories/{id}")
+    public String updateCategory(@PathVariable Long id, Model model) {
+        Category category = categoryRepository.findById(id).get();
+        model.addAttribute("category", category);
+        return "category_edit";
+    }
+
+    @PostMapping("/category/{id}")
+    public String saveUpdateItem(@ModelAttribute Category category, @PathVariable Long id) {
+        Category existCategory = categoryRepository.findById(id).get();
+        existCategory.setId(category.getId());
+        existCategory.setName(category.getName());
+        categoryRepository.save(existCategory);
         return "redirect:/items";
     }
 

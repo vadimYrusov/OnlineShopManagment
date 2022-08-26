@@ -22,7 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/registration/**",
                         "/items",
-                        "/more/**",
+                        "/item/{id}",
                         "/item-images/**")
                 .permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")

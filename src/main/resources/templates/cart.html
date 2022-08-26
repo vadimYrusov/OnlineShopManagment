@@ -28,7 +28,7 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/items}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/cart}">Cart</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/carts}">Cart</a>
                 </li>
                 <form th:action="@{/items}" method="get" style="margin-left: 10%" class="d-flex">
                     <input type="text" name="keyword" th:value="${keyword}" class="form-control me-2"
@@ -39,16 +39,15 @@
                     <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/items/new}">Add new</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/addCategory}">Add new
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/category}">Add new
                         Category</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/editCategory}">Edit
+                    <a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/categories}">Edit
                         Category</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <!--                <a class="btn btn-light my-2 my-sm-0 nav-link" th:href="@{/registration}" type="submit">Register</a>-->
                 <a sec:authorize="isAnonymous()" class="btn btn-light my-2 my-sm-0 mr-1 nav-link" th:href="@{/login}"
                    type="submit">Sign in</a>
 
@@ -58,7 +57,7 @@
     </div>
 </nav>
 
-<div class="card mb-3" style="max-width: 1000px; margin-left: 250px;">
+<div class="card mb-3" style="max-width: 1000px; margin-left: 250px; margin-top: 10px">
     <div class="row g-0" th:each="item : ${cart}" style="margin-top: 10px">
         <div class="col-md-4">
             <img th:src="@{${item.photosImagePath}}" class="img-fluid rounded-start">
@@ -69,7 +68,7 @@
                 <p class="card-text" th:text="${item.price}">Price</p>
                 <p class="card-text"><small class="text-muted" th:text="${item.category}">Category</small></p>
                 <td>
-                    <a th:href="@{/cart/{id}(id=${item.id})}"
+                    <a th:href="@{/carts/{id}(id=${item.id})}"
                        class="btn btn-danger">
                         Delete
                     </a>

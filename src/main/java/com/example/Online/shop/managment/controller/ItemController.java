@@ -97,8 +97,29 @@ public class ItemController {
         existingItem.setPrice(item.getPrice());
         existingItem.setDescription(item.getDescription());
         existingItem.setCategory(item.getCategory());
-        if (file != null) {
+
+//        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//
+//        existingItem.setImageName(fileName);
+//
+//        ShopItem savedItem = itemRepository.save(existingItem);
+//
+//        String uploadDir = "./item-images/" + savedItem.getId();
+//
+//        FileUploadUtil.saveFile(uploadDir, fileName, file);
+
+        if (file.getName().equals("")) {
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+            existingItem.setImageName(fileName);
+
+            ShopItem savedItem = itemRepository.save(existingItem);
+
+            String uploadDir = "./item-images/" + savedItem.getId();
+
+            FileUploadUtil.saveFile(uploadDir, fileName, file);
+        } else {
+            String fileName = StringUtils.cleanPath(existingItem.getImageName());
 
             existingItem.setImageName(fileName);
 

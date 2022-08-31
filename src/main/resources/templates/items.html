@@ -27,7 +27,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" th:href="@{/items}">Home</a>
+                    <a class="nav-link active" aria-current="page" th:href="@{/items}">Main</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" th:href="@{/carts}">Cart</a>
@@ -73,7 +73,7 @@
             <div class="card-block">
                 <h4 class="card-title" style="margin-left: 20px; margin-top: 3px; color: #2F4F4F" th:text="${item.title}">Card title</h4>
                 <hr>
-                <h4 class="card-text" style="margin-left: 20px; margin-bottom: 10px; color: #2F4F4F" th:text="${item.getStringPrice()}">Price</h4>
+                <h4 class="card-text" style="margin-left: 20px; margin-bottom: 10px; color: #2F4F4F" th:text="${item.getPrice()}">Price</h4>
                 <a style="margin-left: 7px; margin-bottom: 7px" th:href="@{/item/{id}(id=${item.id})}" class="btn btn-outline-primary">More</a>
                 <a style="margin-left: 7px; margin-bottom: 7px" th:href="@{/cart/{id}(id=${item.id})}" class="btn btn-primary"> Add</a>
                 <a style="margin-left: 7px; margin-bottom: 7px" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/items/{id}(id=${item.id})}"
@@ -82,7 +82,5 @@
         </div>
     </div>
 </div>
-<div sec:authorize="isAuthenticated()">
-    Authenticated as <span sec:authentication="name"></span></div>
 </body>
 </html>

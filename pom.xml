@@ -66,7 +66,6 @@
             <artifactId>liquibase-core</artifactId>
             <version>4.15.0</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -85,5 +84,13 @@
             </plugin>
         </plugins>
     </build>
-
+    <distributionManagement>
+        <repository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>corp1</id>
+            <name>Corporate Repository</name>
+            <url>scp://repo/maven2</url>
+            <layout>default</layout>
+        </repository>
+    </distributionManagement>
 </project>

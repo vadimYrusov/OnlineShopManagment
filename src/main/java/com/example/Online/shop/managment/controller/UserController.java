@@ -2,7 +2,6 @@ package com.example.Online.shop.managment.controller;
 
 import com.example.Online.shop.managment.entity.Role;
 import com.example.Online.shop.managment.entity.User;
-import com.example.Online.shop.managment.repo.ItemRepository;
 import com.example.Online.shop.managment.repo.RoleRepository;
 import com.example.Online.shop.managment.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +24,6 @@ public class UserController {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     private final UserRepository userRepository;
-
-    private final ItemRepository itemRepository;
 
     private final RoleRepository roleRepository;
 
@@ -52,7 +49,6 @@ public class UserController {
         userRepository.save(user);
         request.login(user.getEmail(), password);
         return "redirect:/items";
-
     }
 
 }

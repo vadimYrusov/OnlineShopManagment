@@ -33,8 +33,9 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
+            <version>42.4.1</version>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -84,13 +85,4 @@
             </plugin>
         </plugins>
     </build>
-    <distributionManagement>
-        <repository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>corp1</id>
-            <name>Corporate Repository</name>
-            <url>scp://repo/maven2</url>
-            <layout>default</layout>
-        </repository>
-    </distributionManagement>
 </project>

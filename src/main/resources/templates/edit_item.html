@@ -73,7 +73,7 @@
 
                                     <input type="text" name="title"
                                            th:field="*{title}" class="form-control form-control-lg"/>
-
+                                    <p  style="color: red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title error</p>
                                 </div>
                             </div>
 
@@ -89,7 +89,7 @@
 
                                     <input type="number" name="price"
                                            th:number="*{price}" class="form-control form-control-lg"/>
-
+                                    <p  style="color: red" th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price error</p>
                                 </div>
                             </div>
 
@@ -106,7 +106,7 @@
                                     <input type="text" name="description"
                                            th:field="*{description}"class="form-control form-control-lg"
                                            placeholder="Description"/>
-
+                                    <p  style="color: red" th:if="${#fields.hasErrors('description')}" th:errors="*{description}">Description error</p>
                                 </div>
                             </div>
 

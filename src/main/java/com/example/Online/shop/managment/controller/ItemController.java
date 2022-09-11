@@ -10,9 +10,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -53,9 +56,14 @@ public class ItemController {
 
     @PostMapping("/items")
     public String saveItem(
-            @ModelAttribute("item") ShopItem shopItem,
+            @ModelAttribute("item") @Valid ShopItem shopItem,
+            BindingResult result,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
+
+        if (result.hasErrors()) {
+            return "create_item";
+        }
 
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         shopItem.setImageName(fileName);
@@ -87,9 +95,14 @@ public class ItemController {
 
     @PostMapping("/item/{id}")
     public String updateItem(@PathVariable Long id,
-                               @ModelAttribute("item") ShopItem item,
+                               @ModelAttribute("item") @Valid ShopItem item,
+                               BindingResult result,
                                @RequestParam("file") MultipartFile file
     ) throws IOException {
+
+        if (result.hasErrors()) {
+            return "edit_item";
+        }
 
         ShopItem existingItem = itemRepository.findById(id).get();
         existingItem.setId(id);
@@ -97,16 +110,6 @@ public class ItemController {
         existingItem.setPrice(item.getPrice());
         existingItem.setDescription(item.getDescription());
         existingItem.setCategory(item.getCategory());
-
-//        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-//
-//        existingItem.setImageName(fileName);
-//
-//        ShopItem savedItem = itemRepository.save(existingItem);
-//
-//        String uploadDir = "./item-images/" + savedItem.getId();
-//
-//        FileUploadUtil.saveFile(uploadDir, fileName, file);
 
         if (file.getName().equals("")) {
             String fileName = StringUtils.cleanPath(file.getOriginalFilename());

@@ -5,10 +5,13 @@ import com.example.Online.shop.managment.repo.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import javax.validation.Valid;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,7 +33,10 @@ public class CategoryController {
     }
 
     @PostMapping("/category")
-    public String saveCategory(@ModelAttribute Category category) {
+    public String saveCategory(@ModelAttribute @Valid Category category, BindingResult result) {
+        if (result.hasErrors()) {
+            return "category";
+        }
         categoryRepository.save(category);
         return "redirect:/items";
     }
@@ -43,7 +49,12 @@ public class CategoryController {
     }
 
     @PostMapping("/category/{id}")
-    public String saveUpdateItem(@ModelAttribute Category category, @PathVariable Long id) {
+    public String saveUpdateItem(@ModelAttribute Category category,
+                                 BindingResult result,
+                                 @PathVariable Long id) {
+        if (result.hasErrors()) {
+            return "category_edit";
+        }
         Category existCategory = categoryRepository.findById(id).get();
         existCategory.setId(category.getId());
         existCategory.setName(category.getName());

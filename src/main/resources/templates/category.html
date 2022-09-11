@@ -68,7 +68,7 @@
                                 <div class="col-md-9 pe-5">
 
                                     <input type="text" name="name" id="name" class="form-control form-control-lg"/>
-
+                                    <p  style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Title error</p>
                                 </div>
                             </div>
 

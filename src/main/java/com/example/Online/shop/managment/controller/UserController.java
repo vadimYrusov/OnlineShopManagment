@@ -8,12 +8,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +42,15 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String saveUser(@ModelAttribute("user") User user, HttpServletRequest request) throws ServletException {
+    public String saveUser(@ModelAttribute("user") @Valid User user,
+                           BindingResult result,
+                           HttpServletRequest request
+    ) throws ServletException {
+
+        if (result.hasErrors()) {
+            return "registration";
+        }
+
         String password = user.getPassword();
         user.setPassword(bCryptPasswordEncoder.encode(password));
         List<Role> roles = new ArrayList<>();

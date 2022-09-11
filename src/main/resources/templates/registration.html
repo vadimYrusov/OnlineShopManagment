@@ -69,7 +69,7 @@
                                 <div class="col-md-9 pe-5">
 
                                     <input type="text" name="name" id="name" class="form-control form-control-lg"/>
-
+                                    <p  style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</p>
                                 </div>
                             </div>
 
@@ -85,7 +85,7 @@
 
                                     <input type="text" name="email" id="email" class="form-control form-control-lg"
                                            placeholder="example@example.com"/>
-
+                                    <p  style="color: red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</p>
                                 </div>
                             </div>
 
@@ -101,7 +101,7 @@
 
                                     <input type="password" name="password" id="password"
                                            class="form-control form-control-lg"/>
-
+                                    <p  style="color: red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password error</p>
                                 </div>
                             </div>
 

@@ -10,5 +10,7 @@ public interface ItemRepository extends JpaRepository<ShopItem, Long> {
 
     List<ShopItem> findByTitleContainsIgnoreCase(@Param("keyword") String keyword);
 
+    ShopItem getShopItemById(Long id);
+
 
 }

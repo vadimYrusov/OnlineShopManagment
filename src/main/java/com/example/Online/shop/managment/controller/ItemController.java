@@ -1,5 +1,6 @@
 package com.example.Online.shop.managment.controller;
 
+import com.example.Online.shop.managment.dto.makeDto.ItemDtoFactory;
 import com.example.Online.shop.managment.entity.Category;
 import com.example.Online.shop.managment.entity.ShopItem;
 import com.example.Online.shop.managment.fileUpload.FileUploadUtil;
@@ -11,19 +12,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
 public class ItemController {
 
     private final ItemRepository itemRepository;
+
+    private final ItemDtoFactory itemDtoFactory;
 
     private final CategoryRepository categoryRepository;
 
@@ -38,7 +41,9 @@ public class ItemController {
             items = itemRepository.findByTitleContainsIgnoreCase(keyword);
         }
 
-        model.addAttribute("items", items);
+        model.addAttribute("items", items.stream()
+                .map(itemDtoFactory::makeItemDto)
+                .collect(Collectors.toList()));
         model.addAttribute("cartCount", GlobalData.cart.size());
         model.addAttribute("category", new Category());
         model.addAttribute("keyword", "");
@@ -80,7 +85,8 @@ public class ItemController {
 
     @GetMapping("/item/{id}")
     public String moreItem(@PathVariable Long id, Model model) {
-        model.addAttribute("item", itemRepository.findById(id));
+        ShopItem item = itemRepository.getShopItemById(id);
+        model.addAttribute("item", itemDtoFactory.makeItemDto(item));
         model.addAttribute("cartCount", GlobalData.cart.size());
 
         return "more_item";
@@ -88,8 +94,8 @@ public class ItemController {
 
     @GetMapping("/items/{id}")
     public String editItemForm(@PathVariable Long id, Model model) {
-        ShopItem item = itemRepository.findById(id).get();
-        model.addAttribute("item", item);
+        ShopItem item = itemRepository.getShopItemById(id);
+        model.addAttribute("item", itemDtoFactory.makeItemDto(item));
         return "edit_item";
     }
 
@@ -104,7 +110,7 @@ public class ItemController {
             return "edit_item";
         }
 
-        ShopItem existingItem = itemRepository.findById(id).get();
+        ShopItem existingItem = itemRepository.getShopItemById(id);
         existingItem.setId(id);
         existingItem.setTitle(item.getTitle());
         existingItem.setPrice(item.getPrice());
